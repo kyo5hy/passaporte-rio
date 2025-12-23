@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Passaporte Rio - Caique & Daniela</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✈️</text></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✈️</text></svg>">
+    <link rel="shortcut icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✈️</text></svg>">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #F8F5F0;
+            scroll-behavior: smooth; 
+            overflow-x: hidden;
+        }
+        .font-serif-italic { font-family: 'Playfair Display', serif; font-style: italic; }
+        .tab-active { 
+            border-bottom: 3px solid #E67E22; 
+            color: #E67E22; 
+            font-weight: 700;
+            position: relative;
+        }
+        .tab-active::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #E67E22;
+        }
+        .dot-line::before {
+            content: ''; 
+            position: absolute; 
+            left: 20px; 
+            top: 0; 
+            bottom: 0;
+            width: 2px; 
+            border-left: 2px dashed #F1C40F; 
+            z-index: 0;
+        }
+        .preserve-3d { transform-style: preserve-3d; }
+        .rotate-y-open { transform: rotateY(-110deg); }
+        .star-active { color: #F1C40F; fill: #F1C40F; }
+        .star-inactive { color: #D1D5DB; }
+        .card-enter { 
+            animation: slideUp 0.5s ease-out forwards; 
+            transition: all 0.3s ease;
+        }
+        .card-enter:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(230, 126, 34, 0.1);
+        }
+        @keyframes slideUp { 
+            from { opacity: 0; transform: translateY(20px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        @keyframes stamp {
+            0% { transform: scale(0.5) rotate(-10deg); opacity: 0; }
+            100% { transform: scale(1) rotate(8deg); opacity: 1; }
+        }
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+        .float-animation { animation: float 6s ease-in-out infinite; }
+        .pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+        .passport-stamp {
+            background: radial-gradient(circle at 30% 30%, #E67E22, #d35400);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 15px rgba(230, 126, 34, 0.3);
+            animation: stamp 0.8s ease-out forwards;
+            animation-delay: 0.5s;
+            opacity: 0;
+        }
+        .passport-emboss {
+            position: relative;
+            overflow: hidden;
+        }
+        .passport-emboss::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 1px,
+                    rgba(255, 255, 255, 0.05) 1px,
+                    rgba(255, 255, 255, 0.05) 2px
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 1px,
+                    rgba(255, 255, 255, 0.05) 1px,
+                    rgba(255, 255, 255, 0.05) 2px
+                );
+            pointer-events: none;
+            z-index: 1;
+        }
+        .passport-shine {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(255, 255, 255, 0.1) 50%,
+                transparent 70%
+            );
+            animation: shine 3s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 2;
+        }
+        .ripple {
+            position: relative;
+            overflow: hidden;
+        }
+        .ripple:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+        .ripple:focus:not(:active)::after {
+            animation: ripple 1s ease-out;
+        }
+        @keyframes ripple {
+            0% { transform: scale(0, 0); opacity: 0.5; }
+            100% { transform: scale(50, 50); opacity: 0; }
+        }
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #E67E22 50%, transparent);
+            margin: 40px 0;
+        }
+        .passport-corner {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+        }
+        .passport-corner-tl {
+            top: 15px;
+            left: 15px;
+            border-top: 3px solid #E67E22;
+            border-left: 3px solid #E67E22;
+        }
+        .passport-corner-tr {
+            top: 15px;
+            right: 15px;
+            border-top: 3px solid #E67E22;
+            border-right: 3px solid #E67E22;
+        }
+        .passport-corner-bl {
+            bottom: 15px;
+            left: 15px;
+            border-bottom: 3px solid #E67E22;
+            border-left: 3px solid #E67E22;
+        }
+        .passport-corner-br {
+            bottom: 15px;
+            right: 15px;
+            border-bottom: 3px solid #E67E22;
+            border-right: 3px solid #E67E22;
+        }
+        .passport-stitching {
+            position: absolute;
+            width: calc(100% - 30px);
+            height: 2px;
+            background: repeating-linear-gradient(
+                90deg,
+                #F1C40F,
+                #F1C40F 3px,
+                #E67E22 3px,
+                #E67E22 6px
+            );
+            left: 15px;
+        }
+        .passport-stitching-top {
+            top: 40px;
+        }
+        .passport-stitching-bottom {
+            bottom: 40px;
+        }
+        .passport-gold-text {
+            color: #F1C40F;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            letter-spacing: 0.3em;
+        }
+        .passport-crest {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto;
+        }
+        .passport-crest::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at center, #1A2A44 40%, transparent 41%),
+                radial-gradient(circle at center, #E67E22 60%, transparent 61%);
+            border-radius: 50%;
+        }
+        .passport-crest::after {
+            content: 'BR';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            letter-spacing: 2px;
+        }
+        .passport-title {
+            font-size: 28px;
+            letter-spacing: 0.4em;
+            font-weight: 700;
+        }
+        .passport-subtitle {
+            font-size: 10px;
+            letter-spacing: 0.3em;
+        }
+        .passport-names {
+            font-size: 18px;
+            letter-spacing: 0.1em;
+        }
+        .passport-info-label {
+            font-size: 8px;
+            letter-spacing: 0.2em;
+        }
+        .passport-info-value {
+            font-size: 11px;
+            letter-spacing: 0.1em;
+        }
+        .remove-btn {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .card-enter:hover .remove-btn {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="text-[#2C3E50] overflow-x-hidden">
+
+    <div id="passport-overlay" class="fixed inset-0 z-[100] flex items-center justify-center bg-[#1a2a44]">
+        <div onclick="openPassport()" class="relative w-[90vw] max-w-[400px] h-[600px] cursor-pointer perspective-[1500px] ripple">
+            <!-- Efeito de brilho -->
+            <div class="passport-shine"></div>
+            
+            <div id="passport-cover" class="relative w-full h-full preserve-3d transition-transform duration-1000 origin-left bg-gradient(145deg, #0c1124, #1a2a44) rounded-r-2xl shadow-[0_25px_50px_rgba(0,0,0,0.5)] flex flex-col items-center justify-center p-8 border-l-[10px] border-amber-600 passport-emboss">
+                
+                <!-- Cantos decorativos -->
+                <div class="passport-corner passport-corner-tl"></div>
+                <div class="passport-corner passport-corner-tr"></div>
+                <div class="passport-corner passport-corner-bl"></div>
+                <div class="passport-corner passport-corner-br"></div>
+                
+                <!-- Costura decorativa -->
+                <div class="passport-stitching passport-stitching-top"></div>
+                <div class="passport-stitching passport-stitching-bottom"></div>
+                
+                <div class="w-full h-full border-2 border-amber-600/30 rounded-xl flex flex-col items-center justify-center text-center relative z-10 bg-gradient(145deg, rgba(26,42,68,0.95), rgba(12,17,36,0.95))">
+                    
+                    <!-- Brasão do passaporte -->
+                    <div class="passport-crest mb-6"></div>
+                    
+                    <!-- Título PASSPORTE -->
+                    <div class="mb-4">
+                        <h1 class="text-amber-500 font-bold uppercase mb-2 passport-title passport-gold-text">
+                            P A S S P O R T E
+                        </h1>
+                        <div class="w-40 h-[1px] bg-gradient(90deg, transparent, #F1C40F, #E67E22, transparent) mx-auto rounded-full mb-3"></div>
+                    </div>
+                    
+                    <!-- República Federativa do Brasil -->
+                    <div class="mb-8">
+                        <p class="text-gray-300 uppercase tracking-widest mb-1 passport-subtitle">REPÚBLICA FEDERATIVA DO BRASIL</p>
+                        <p class="text-gray-400 uppercase tracking-widest passport-subtitle">PASSAPORTE ELETRÔNICO</p>
+                    </div>
+                    
+                    <!-- Linha divisória -->
+                    <div class="w-48 h-px bg-gradient(90deg, transparent, rgba(241,196,15,0.3), rgba(230,126,34,0.3), transparent) mx-auto mb-6"></div>
+                    
+                    <!-- Nomes dos titulares -->
+                    <div class="mb-8">
+                        <div class="bg-gradient(90deg, rgba(241,196,15,0.1), rgba(230,126,34,0.1)) p-4 rounded-lg border border-amber-600/30 mb-3">
+                            <p class="text-amber-100 font-bold uppercase mb-2 passport-names">
+                                CAIQUE OLIVEIRA
+                            </p>
+                            <p class="text-amber-100 font-bold uppercase passport-names">
+                                DANIELA SILVA
+                            </p>
+                        </div>
+                        <p class="text-gray-300 text-sm font-serif-italic tracking-wide">
+                            Viajantes em Missão Romântica
+                        </p>
+                    </div>
+                    
+                    <!-- Informações do passaporte -->
+                    <div class="mb-8 w-full px-8">
+                        <div class="grid grid-cols-2 gap-4 mb-4">
+                            <div class="text-left">
+                                <p class="text-gray-400 uppercase tracking-widest mb-1 passport-info-label">Nº DO PASSAPORTE</p>
+                                <p class="text-amber-100 font-mono passport-info-value">
+                                    BR • C&D • 2026<br>
+                                    • RIO
+                                </p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-gray-400 uppercase tracking-widest mb-1 passport-info-label">VALIDADE</p>
+                                <p class="text-amber-100 passport-info-value">
+                                    06-08 JAN 2026
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="text-left">
+                                <p class="text-gray-400 uppercase tracking-widest mb-1 passport-info-label">DATA DE EMISSÃO</p>
+                                <p class="text-amber-100 passport-info-value">01 JAN 2026</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-gray-400 uppercase tracking-widest mb-1 passport-info-label">AUTORIDADE</p>
+                                <p class="text-amber-100 passport-info-value">AMOR ETERNO</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Carimbo de destino -->
+                    <div class="mb-6 relative">
+                        <div class="passport-stamp w-20 h-20 rounded-full flex items-center justify-center text-sm font-bold rotate-8">
+                            <div class="transform -rotate-8 text-center">
+                                <div class="font-bold text-lg">RIO</div>
+                                <div class="text-[10px] mt-1">DESTINO</div>
+                                <div class="text-[8px] mt-1">06-08/01/26</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Instrução para abrir -->
+                    <div class="mt-4">
+                        <div class="flex items-center justify-center gap-2">
+                            <div class="w-5 h-5 rounded-full bg-amber-500 flex items-center justify-center animate-bounce">
+                                <i class="fas fa-hand-point-up text-white text-xs"></i>
+                            </div>
+                            <p class="text-amber-500/70 text-xs uppercase tracking-[0.3em] font-semibold pulse-glow">
+                                Clique para abrir
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Texto pequeno de rodapé -->
+                    <p class="absolute bottom-4 text-amber-500/20 text-[8px] uppercase tracking-[0.4em]">
+                        DOCUMENTO DE VIAGEM DIGITAL
+                    </p>
+                    
+                    <!-- Código de barras decorativo -->
+                    <div class="absolute bottom-12 left-4 right-4 h-6 bg-gradient(90deg, 
+                        #000 2px, #fff 2px, #fff 4px, 
+                        #000 4px, #000 6px, #fff 6px, #fff 8px,
+                        #000 8px, #000 10px, #fff 10px, #fff 12px,
+                        #000 12px, #000 14px, #fff 14px, #fff 16px,
+                        #000 16px, #000 18px, #fff 18px, #fff 20px
+                    ) opacity-20"></div>
+                </div>
+                
+                <!-- Selo holográfico -->
+                <div class="absolute top-6 right-6 w-12 h-12 bg-gradient(135deg, 
+                    rgba(241,196,15,0.8) 0%, 
+                    rgba(230,126,34,0.6) 50%, 
+                    rgba(241,196,15,0.8) 100%
+                ) rounded-full flex items-center justify-center shadow-lg border border-amber-300/30">
+                    <i class="fas fa-globe-americas text-white text-lg"></i>
+                </div>
+                
+                <!-- Texto lateral "BRASIL" -->
+                <div class="absolute left-4 top-1/2 transform -translate-y-1/2 -rotate-90">
+                    <p class="text-amber-500/20 text-sm uppercase tracking-widest font-bold">BRASIL</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Elementos decorativos flutuantes -->
+        <div class="absolute top-10 left-10 text-white/10">
+            <i class="fas fa-plane-departure text-4xl float-animation"></i>
+        </div>
+        <div class="absolute bottom-10 right-10 text-white/10">
+            <i class="fas fa-umbrella-beach text-4xl float-animation" style="animation-delay: 1s"></i>
+        </div>
+        <div class="absolute top-1/4 right-10 text-white/10">
+            <i class="fas fa-heart text-3xl float-animation" style="animation-delay: 0.5s"></i>
+        </div>
+        <div class="absolute bottom-1/4 left-10 text-white/10">
+            <i class="fas fa-map-marker-alt text-3xl float-animation" style="animation-delay: 1.5s"></i>
+        </div>
+    </div>
+
+    <!-- APLICAÇÃO PRINCIPAL -->
+    <div id="main-app" class="hidden opacity-0 transition-all duration-1000">
+        <header class="bg-[#1A2A44] text-white py-20 text-center relative shadow-2xl overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1 bg-amber-600"></div>
+            
+            <div class="relative z-10">
+                <p class="font-serif-italic text-amber-500 text-2xl mb-4 flex items-center justify-center gap-3">
+                    <i class="fas fa-heart text-xl"></i> Caique & Daniela em <i class="fas fa-heart text-xl"></i>
+                </p>
+                <h1 class="text-5xl md:text-7xl font-extrabold tracking-[0.1em] uppercase mb-6 text-amber-500">Rio de Janeiro</h1>
+                
+                <div class="flex items-center justify-center gap-8 mt-12">
+                    <div class="text-center">
+                        <div class="text-amber-500 font-bold text-3xl">06</div>
+                        <div class="text-gray-400 text-xs uppercase tracking-widest">JAN</div>
+                    </div>
+                    <div class="w-16 h-px bg-amber-600/50"></div>
+                    <div class="text-center">
+                        <div class="text-amber-500 font-bold text-3xl">07</div>
+                        <div class="text-gray-400 text-xs uppercase tracking-widest">JAN</div>
+                    </div>
+                    <div class="w-16 h-px bg-amber-600/50"></div>
+                    <div class="text-center">
+                        <div class="text-amber-500 font-bold text-3xl">08</div>
+                        <div class="text-gray-400 text-xs uppercase tracking-widest">JAN</div>
+                    </div>
+                </div>
+                
+                <div class="mt-12 flex items-center justify-center gap-6">
+                    <div class="bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 flex items-center gap-3">
+                        <i class="fas fa-sun text-amber-500 text-xl"></i>
+                        <div>
+                            <div class="text-sm font-bold">30°C</div>
+                            <div class="text-xs opacity-70">Ensolarado</div>
+                        </div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 flex items-center gap-3">
+                        <i class="fas fa-umbrella-beach text-amber-500 text-xl"></i>
+                        <div>
+                            <div class="text-sm font-bold">PRAIA</div>
+                            <div class="text-xs opacity-70">Verão no Rio</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="absolute bottom-0 left-0 w-full h-2 bg-amber-600"></div>
+        </header>
+
+        <nav class="bg-white border-b sticky top-0 z-50 shadow-lg">
+            <div class="max-w-6xl mx-auto px-4 flex items-center justify-between">
+                <div class="flex space-x-6 md:space-x-12" id="tab-list">
+                    <button onclick="switchTab('day-06')" id="tab-06" class="py-6 text-xs font-bold uppercase tracking-widest tab-active flex flex-col items-center gap-1">
+                        <span>06 JAN</span>
+                        <span class="text-[10px] text-gray-500 font-normal">Chegada</span>
+                    </button>
+                    <button onclick="switchTab('day-07')" id="tab-07" class="py-6 text-xs font-bold uppercase tracking-widest text-gray-400 flex flex-col items-center gap-1">
+                        <span>07 JAN</span>
+                        <span class="text-[10px] text-gray-500 font-normal">Aventura</span>
+                    </button>
+                    <button onclick="switchTab('day-08')" id="tab-08" class="py-6 text-xs font-bold uppercase tracking-widest text-gray-400 flex flex-col items-center gap-1">
+                        <span>08 JAN</span>
+                        <span class="text-[10px] text-gray-500 font-normal">Cultura</span>
+                    </button>
+                </div>
+                <button onclick="toggleEdit()" id="edit-btn" class="bg-[#FEF5E7] text-[#E67E22] px-8 py-3 rounded-full font-bold text-xs shadow-lg hover:shadow-xl hover:scale-105 transition-all ripple">
+                    <i class="fas fa-edit mr-2"></i>Editar
+                </button>
+            </div>
+        </nav>
+
+        <main class="max-w-6xl mx-auto px-4 py-12">
+            <div class="mb-16 text-center">
+                <h2 class="text-4xl font-bold mb-4 text-[#1a2a44]">Nosso Roteiro</h2>
+                <p class="text-gray-500 max-w-2xl mx-auto">Cada momento planejado com carinho para transformar esses dias em memórias eternas.</p>
+            </div>
+            
+            <div id="day-container" class="space-y-12"></div>
+
+            <div class="section-divider"></div>
+
+            <section class="mt-8 bg-white p-10 rounded-[3rem] shadow-xl border border-amber-100 mb-16 relative overflow-hidden">
+                <div class="absolute -top-10 -right-10 w-40 h-40 bg-amber-50/30 rounded-full"></div>
+                <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-amber-50/30 rounded-full"></div>
+                
+                <div class="relative z-10">
+                    <h2 class="text-3xl font-bold mb-10 text-[#1a2a44] flex items-center gap-3">
+                        <i class="fas fa-suitcase-rolling text-amber-500 text-2xl"></i>
+                        <span>🎒 Checklist Essencial</span>
+                    </h2>
+                    
+                    <div class="mb-8 bg-amber-50/50 rounded-2xl p-6 border border-amber-100">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-10 h-10 rounded-full bg-amber-500 flex items-center justify-center text-white">
+                                <i class="fas fa-info"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-amber-800">Dica de Viagem</h3>
+                                <p class="text-sm text-amber-600">Marque os itens conforme for arrumando as malas!</p>
+                            </div>
+                        </div>
+                        <div class="text-xs text-amber-500 flex items-center gap-2">
+                            <i class="fas fa-lightbulb"></i>
+                            <span>Progresso: <span id="checklist-progress">0%</span></span>
+                        </div>
+                    </div>
+                    
+                    <div id="checklist-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+                </div>
+            </section>
+
+            <div class="section-divider"></div>
+
+            <section class="mb-20">
+                <h2 class="text-3xl font-bold mb-10 text-center text-[#1a2a44]">Memórias da Viagem</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="rounded-2xl overflow-hidden h-40 bg-[#E67E22] flex items-center justify-center">
+                        <i class="fas fa-camera text-white text-3xl"></i>
+                    </div>
+                    <div class="rounded-2xl overflow-hidden h-40 bg-[#1a2a44] flex items-center justify-center">
+                        <i class="fas fa-video text-white text-3xl"></i>
+                    </div>
+                    <div class="rounded-2xl overflow-hidden h-40 bg-[#F1C40F] flex items-center justify-center">
+                        <i class="fas fa-heart text-white text-3xl"></i>
+                    </div>
+                    <div class="rounded-2xl overflow-hidden h-40 bg-[#0a0e2a] flex items-center justify-center">
+                        <i class="fas fa-map-marker-alt text-white text-3xl"></i>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="bg-[#1a2a44] text-white py-20 text-center relative overflow-hidden">
+            <div class="absolute inset-0 opacity-5" style="background-image: url('https://images.unsplash.com/photo-1516306580123-e6e52b1b7b5f?q=80&w=2126'); background-size: cover;"></div>
+            
+            <div class="relative z-10">
+                <p class="font-serif-italic text-2xl text-amber-500 mb-6">Uma viagem para recordar sempre!</p>
+                <h3 class="text-3xl font-bold mb-8 text-amber-500">Caique & Daniela</h3>
+                
+                <div class="flex items-center justify-center gap-6 mb-10">
+                    <div class="w-12 h-12 rounded-full bg-[#E67E22] flex items-center justify-center">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <div class="w-12 h-12 rounded-full bg-[#1a2a44] flex items-center justify-center">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="w-12 h-12 rounded-full bg-[#F1C40F] flex items-center justify-center">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                </div>
+                
+                <p class="opacity-40 text-xs uppercase tracking-[0.4em] mt-12">Rio de Janeiro • Janeiro 2026</p>
+                <p class="opacity-30 text-[10px] uppercase tracking-widest mt-4">Passaporte Digital de Viagem</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        let isEditing = false;
+        let activeTab = 'day-06';
+
+        const defaultData = {
+            'day-06': {
+                route: "A linha do mapa começa no Hotel e sobe em direção ao Pão de Açúcar.",
+                title: "DIA 06 | A Chegada e o Coração da Urca",
+                icon: "fa-plane-arrival",
+                activities: [
+                    { id: 1, time: "14:00", task: "Check-in", sub: "Hotel / Recepção", img: "https://images.trvl-media.com/lodging/16000000/15610000/15605600/15605554/4aa0cfa3.jpg?impolicy=fcrop&w=357&h=201&p=1&q=medium", completed: false, comment: "", rating: 0 },
+                    { id: 2, time: "15:00", task: "Almoço: Bar Garota da Urca", sub: "Tradicional Picanha na Chapa", img: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/dd/a5/97/canja-de-galinha.jpg?w=600&h=-1&s=1", completed: false, comment: "", rating: 0 },
+                    { id: 3, time: "16:00", task: "Passeio Local", sub: "Explorar as ruas da Urca", img: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/22/af/7e/ef/praia-da-urca.jpg?w=1200&h=-1&s=1", completed: false, comment: "", rating: 0 },
+                    { id: 4, time: "18:40", task: "Pôr do sol no Morro da Urca", sub: "Complexo Pão de Açúcar", img: "https://media.istockphoto.com/id/518232926/photo/the-view-from-the-sugarloaf-mountain.jpg?s=612x612&w=0&k=20&c=KwOpgnNV_bjcWIaR2xcx01CKfGzn8xz9RcCyUHO1hco=", completed: false, comment: "", rating: 0 },
+                    { id: 5, time: "20:30", task: "Jantar: Julius Brasserie", sub: "Charme e Gastronomia na Urca", img: "https://media-cdn.tripadvisor.com/media/photo-s/1b/dd/a6/e7/a-famosa-picanha-no-rechaud.jpg", completed: false, comment: "", rating: 0 }
+                ]
+            },
+            'day-07': {
+                route: "Atravessando o túnel rumo ao Cristo e Copacabana.",
+                title: "DIA 07 | O Coração Turístico",
+                icon: "fa-compass",
+                activities: [
+                    { id: 6, time: "08:00", task: "Passeio Cristo Redentor", sub: "Maravilha do Mundo", img: "https://as2.ftcdn.net/jpg/03/32/16/31/1000_F_332163103_MeERJCi83wChH0hDhO54yEhGzMpkB3cN.jpg", completed: false, comment: "", rating: 0 },
+                    { id: 7, time: "10:00", task: "Bicicleta em Copacabana", sub: "Pedalada no Calçadão", img: "https://dynamic-media.tacdn.com/media/photo-o/2e/d5/df/9d/caption.jpg?w=1100&h=800&s=1", completed: false, comment: "", rating: 0 },
+                    { id: 8, time: "13:00", task: "Almoço: Samba SKY ou VIZTA", sub: "Vista Panorâmica da Orla", img: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/30/c9/48/de/caption.jpg?w=900&h=500&s=1", completed: false, comment: "", rating: 0 },
+                    { id: 9, time: "16:00", task: "Forte de Copacabana", sub: "História e Café com Vista", img: "https://upload.wikimedia.org/wikipedia/commons/b/b3/Conjunto_Copacabana_-_Rio_de_Janeiro_-_20230911071214.jpg", completed: false, comment: "", rating: 0 },
+                    { id: 10, time: "18:40", task: "Pôr do sol no Arpoador", sub: "Aplaudindo o espetáculo", img: "https://riomemorias.com.br/wp-content/uploads/2024/11/por-do-sol-no-arpoador.jpg", completed: false, comment: "", rating: 0 },
+                    { id: 11, time: "20:30", task: "Jantar: Arp Bar", sub: "Pé na areia sofisticado", img: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/16/b4/0d/28/hotel-arpoador.jpg?w=700&h=-1&s=1", completed: false, comment: "", rating: 0 }
+                ]
+            },
+            'day-08': {
+                route: "Do mar de Copacabana à boemia da Lapa.",
+                title: "DIA 08 | Cultura, Mar e História",
+                icon: "fa-landmark",
+                activities: [
+                    { id: 12, time: "05:00", task: "Nascer do Sol de Stand Up", sub: "Copacabana Posto 6", img: "https://media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/13/c7/f8/50.jpg", completed: false, comment: "", rating: 0 },
+                    { id: 13, time: "10:00", task: "AquaRio & Museus", sub: "Maior Aquário da América Latina", img: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2d/00/eb/3e/casal-no-tunel-do-aquario.jpg?w=1200&h=-1&s=1", completed: false, comment: "", rating: 0 },
+                    { id: 14, time: "12:00", task: "Roda Gigante Yup Star", sub: "Vista do Porto Maravilha", img: "https://dynamic-media.tacdn.com/media/photo-o/2e/d5/ea/77/caption.jpg?w=1100&h=800&s=1", completed: false, comment: "", rating: 0 },
+                    { id: 15, time: "13:30", task: "Almoço: Cais do Oriente", sub: "Refúgio no Centro Histórico", img: "https://www.rioculturalsecrets.com/wp-content/uploads/2023/10/confeitaria-colombo-rio-de-janeiro.jpg", completed: false, comment: "", rating: 0 },
+                    { id: 16, time: "15:00", task: "Biblioteca & Real Gabinete", sub: "Gabinete Português de Leitura", img: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/2a/95/e8/interior-of-the-portuguese.jpg?w=900&h=500&s=1", completed: false, comment: "", rating: 0 },
+                    { id: 17, time: "16:30", task: "Arcos da Lapa & Selarón", sub: "Escadaria mais famosa do mundo", img: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/18/23/e8/81/escadaria-selaron.jpg?w=900&h=500&s=1", completed: false, comment: "", rating: 0 },
+                    { id: 18, time: "21:00", task: "Jantar: Rio Scenarium", sub: "Cultura e Música na Lapa", img: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0b/fd/76/fd/decoracao-linda.jpg?w=600&h=400&s=1", completed: false, comment: "", rating: 0 }
+                ]
+            }
+        };
+
+        let itinerary = JSON.parse(localStorage.getItem('rio-passport-final')) || defaultData;
+        let checklistItems = JSON.parse(localStorage.getItem('rio-checklist-final')) || [
+            { t: "Protetor solar e óculos", c: false, icon: "fa-sun" }, 
+            { t: "Power Bank", c: false, icon: "fa-battery-full" }, 
+            { t: "Documento com foto", c: false, icon: "fa-id-card" }, 
+            { t: "Garrafa d'água", c: false, icon: "fa-wine-bottle" },
+            { t: "Câmera fotográfica", c: false, icon: "fa-camera" },
+            { t: "Roupas de banho", c: false, icon: "fa-umbrella-beach" },
+            { t: "Tênis confortável", c: false, icon: "fa-shoe-prints" },
+            { t: "Carregador portátil", c: false, icon: "fa-plug" }
+        ];
+
+        function openPassport() {
+            document.getElementById('passport-cover').classList.add('rotate-y-open');
+            document.getElementById('passport-overlay').classList.add('opacity-0');
+            setTimeout(() => {
+                document.getElementById('passport-overlay').style.display = 'none';
+                document.getElementById('main-app').classList.replace('hidden', 'block');
+                setTimeout(() => document.getElementById('main-app').classList.remove('opacity-0'), 100);
+                render();
+            }, 800);
+        }
+
+        function switchTab(id) {
+            activeTab = id;
+            document.querySelectorAll('#tab-list button').forEach(b => b.classList.replace('tab-active', 'text-gray-400'));
+            document.getElementById('tab-' + id.split('-')[1]).classList.add('tab-active');
+            render();
+        }
+
+        function toggleEdit() {
+            isEditing = !isEditing;
+            document.getElementById('edit-btn').innerHTML = isEditing ? 
+                '<i class="fas fa-save mr-2"></i>Salvar' : 
+                '<i class="fas fa-edit mr-2"></i>Editar';
+            render();
+        }
+
+        function updateData(id, field, value) {
+            itinerary[activeTab].activities.find(a => a.id === id)[field] = value;
+            localStorage.setItem('rio-passport-final', JSON.stringify(itinerary));
+        }
+
+        function removeActivity(id) {
+            if (confirm("Tem certeza que deseja remover esta atividade?")) {
+                const dayActivities = itinerary[activeTab].activities;
+                itinerary[activeTab].activities = dayActivities.filter(activity => activity.id !== id);
+                localStorage.setItem('rio-passport-final', JSON.stringify(itinerary));
+                render();
+            }
+        }
+
+        function renderStars(id, rating) {
+            let html = '';
+            for (let i = 1; i <= 5; i++) {
+                html += `<span onclick="updateData(${id}, 'rating', ${i}); render();" class="cursor-pointer text-lg ${i <= rating ? 'star-active' : 'star-inactive'} transition-transform hover:scale-125">★</span>`;
+            }
+            return html;
+        }
+
+        function updateChecklistProgress() {
+            const completed = checklistItems.filter(item => item.c).length;
+            const total = checklistItems.length;
+            const progress = Math.round((completed / total) * 100);
+            document.getElementById('checklist-progress').textContent = `${progress}%`;
+        }
+
+        function render() {
+            const container = document.getElementById('day-container');
+            const day = itinerary[activeTab];
+
+            let html = `
+                <div class="flex items-center gap-6 mb-12 card-enter bg-white p-8 rounded-[2.5rem] shadow-xl border border-amber-100">
+                    <div class="bg-[#E67E22] text-white w-16 h-16 flex items-center justify-center rounded-2xl font-bold text-2xl shadow-xl">
+                        <i class="fas ${day.icon || 'fa-calendar-day'}"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-3xl font-extrabold text-[#1A2A44] leading-tight mb-2">${day.title}</h3>
+                        <p class="text-gray-500 font-serif-italic flex items-center gap-2">
+                            <i class="fas fa-route text-amber-500"></i>
+                            ${day.route}
+                        </p>
+                    </div>
+                    <div class="hidden md:block">
+                        <div class="text-xs text-gray-400 uppercase tracking-widest mb-2">Progresso do Dia</div>
+                        <div class="w-48 h-2 bg-gray-200 rounded-full overflow-hidden">
+                            <div class="h-full bg-amber-500 rounded-full" style="width: ${(day.activities.filter(a => a.completed).length / day.activities.length) * 100}%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative dot-line pl-12 space-y-10">
+                    <div class="absolute left-[13px] top-6 w-6 h-6 bg-amber-500 border-4 border-white rounded-full z-10 shadow-lg flex items-center justify-center">
+                        <div class="w-2 h-2 bg-white rounded-full"></div>
+                    </div>
+            `;
+
+            day.activities.forEach((act, index) => {
+                const isDefaultActivity = act.id <= 18; // IDs das atividades padrão
+                
+                html += `
+                <div class="bg-white p-8 rounded-[2.5rem] shadow-lg border border-amber-100 flex flex-col md:flex-row gap-8 card-enter relative">
+                    
+                    ${isEditing && !isDefaultActivity ? `
+                    <button onclick="removeActivity(${act.id})" class="remove-btn absolute -top-3 -right-3 w-8 h-8 bg-red-500 text-white rounded-full flex items-center justify-center shadow-lg hover:bg-red-600 transition-all z-20">
+                        <i class="fas fa-times text-xs"></i>
+                    </button>
+                    ` : ''}
+                    
+                    <div class="flex-1">
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="flex items-center gap-4">
+                                ${isEditing ? 
+                                    `<input onchange="updateData(${act.id}, 'time', this.value)" class="text-[#E67E22] font-bold text-lg w-20 bg-amber-50 rounded-xl px-3 py-1 text-center" value="${act.time}">` : 
+                                    `<div class="bg-amber-50 text-[#E67E22] font-bold text-lg rounded-xl px-4 py-2 shadow-inner">${act.time}</div>`
+                                }
+                                <button onclick="updateData(${act.id}, 'completed', ${!act.completed}); render();" class="w-8 h-8 rounded-full flex items-center justify-center ${act.completed ? 'bg-green-500 text-white shadow-lg' : 'bg-gray-100 border-2 border-gray-300'} transition-all hover:scale-110">
+                                    ${act.completed ? '<i class="fas fa-check text-xs"></i>' : ''}
+                                </button>
+                            </div>
+                            <div class="flex gap-1">${renderStars(act.id, act.rating)}</div>
+                        </div>
+                        ${isEditing ? 
+                            `<input onchange="updateData(${act.id}, 'task', this.value)" class="text-2xl font-bold text-[#1A2A44] w-full border-b-2 border-amber-200 mb-2 outline-none pb-2" value="${act.task}">` : 
+                            `<h4 class="text-2xl font-bold ${act.completed ? 'opacity-40 line-through' : 'text-[#1A2A44]'}">${act.task}</h4>`
+                        }
+                        <p class="text-gray-500 text-sm uppercase font-semibold tracking-widest mb-6 flex items-center gap-2">
+                            <i class="fas fa-map-marker-alt text-amber-500"></i>
+                            ${act.sub}
+                        </p>
+                        <div class="${act.completed ? 'block' : 'hidden'} card-enter mt-6">
+                            <div class="flex items-center gap-2 mb-2">
+                                <i class="fas fa-comment text-amber-500"></i>
+                                <span class="text-sm font-semibold text-amber-700">Seu comentário:</span>
+                            </div>
+                            <textarea onchange="updateData(${act.id}, 'comment', this.value)" class="w-full text-sm p-4 bg-amber-50/50 rounded-2xl border border-amber-200 focus:border-amber-400 outline-none transition-all" placeholder="O que achou desse lugar? Anote suas impressões...">${act.comment}</textarea>
+                        </div>
+                    </div>
+                    
+                    ${act.img ? `
+                    <div class="w-full md:w-56 h-48 rounded-3xl overflow-hidden relative group shadow-xl">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <img src="${act.img}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        ${isEditing ? 
+                            `<label class="absolute inset-0 bg-black/60 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer z-20 text-white p-4">
+                                <i class="fas fa-camera-retro text-2xl mb-2"></i>
+                                <span class="text-xs font-bold uppercase">Trocar Foto</span>
+                                <input type="file" class="hidden" onchange="const f=this.files[0]; const r=new FileReader(); r.onload=e=>{updateData(${act.id},'img',e.target.result);render()}; f&&r.readAsDataURL(f)">
+                            </label>` : 
+                            `<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity z-20">
+                                <div class="flex items-center justify-between">
+                                    <span>Parada ${index + 1}</span>
+                                    <span>${act.completed ? '✓ Concluído' : '⬤ Pendente'}</span>
+                                </div>
+                            </div>`
+                        }
+                    </div>
+                    ` : `
+                    <div class="w-full md:w-56 h-48 rounded-3xl bg-amber-50 border-2 border-dashed border-amber-200 flex flex-col items-center justify-center relative group transition-all hover:border-amber-400">
+                        <i class="fas fa-image text-amber-300 text-4xl mb-3"></i>
+                        <p class="text-amber-400 text-sm font-semibold mb-1">Sem foto ainda</p>
+                        <p class="text-amber-300 text-xs">Adicione uma imagem</p>
+                        ${isEditing ? 
+                            `<label class="absolute inset-0 flex flex-col items-center justify-center cursor-pointer bg-amber-50/70 opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl">
+                                <i class="fas fa-plus-circle text-amber-500 text-2xl mb-2"></i>
+                                <span class="text-xs font-bold text-amber-600 uppercase">Adicionar Foto</span>
+                                <input type="file" class="hidden" onchange="const f=this.files[0]; const r=new FileReader(); r.onload=e=>{updateData(${act.id},'img',e.target.result);render()}; f&&r.readAsDataURL(f)">
+                            </label>` : 
+                            ''
+                        }
+                    </div>
+                    `}
+                </div>`;
+            });
+
+            if(isEditing) {
+                html += `
+                <div class="flex flex-col md:flex-row gap-4">
+                    <button onclick="const id=Date.now(); itinerary[activeTab].activities.push({id, time:'00:00', task:'Nova Atividade', sub:'Local', img:null, completed:false, rating:0, comment:''}); render();" class="flex-1 py-6 border-2 border-dashed border-amber-300 rounded-[2.5rem] text-amber-600 font-bold hover:bg-amber-50 transition-all flex flex-col items-center gap-2">
+                        <i class="fas fa-plus-circle text-2xl"></i>
+                        <span>Adicionar Nova Atividade</span>
+                    </button>
+                    
+                    ${day.activities.length > 1 ? `
+                    <button onclick="if(confirm('Remover TODAS as atividades adicionadas deste dia?')) { itinerary[activeTab].activities = itinerary[activeTab].activities.filter(a => a.id <= 18); render(); }" class="md:w-1/4 py-6 border-2 border-dashed border-red-300 rounded-[2.5rem] text-red-500 font-bold hover:bg-red-50 transition-all flex flex-col items-center gap-2">
+                        <i class="fas fa-trash-alt text-xl"></i>
+                        <span class="text-sm">Limpar Adicionadas</span>
+                    </button>
+                    ` : ''}
+                </div>`;
+            }
+                
+            container.innerHTML = html + `</div>`;
+
+            // Render checklist
+            const checklistGrid = document.getElementById('checklist-grid');
+            checklistGrid.innerHTML = checklistItems.map((item, idx) => `
+                <div onclick="checklistItems[${idx}].c = !checklistItems[${idx}].c; localStorage.setItem('rio-checklist-final', JSON.stringify(checklistItems)); render();" class="flex items-center gap-4 p-5 rounded-2xl border-2 transition-all cursor-pointer ripple ${item.c ? 'bg-green-50 border-green-200 shadow-sm' : 'bg-white border-amber-100 hover:border-amber-300 hover:shadow-md'}">
+                    <div class="w-10 h-10 rounded-full ${item.c ? 'bg-green-500' : 'bg-amber-100'} flex items-center justify-center ${item.c ? 'text-white' : 'text-amber-600'} transition-all">
+                        <i class="fas ${item.icon || 'fa-check'} ${item.c ? 'text-xs' : ''}"></i>
+                    </div>
+                    <div class="flex-1">
+                        <span class="text-sm font-medium ${item.c ? 'text-green-700 line-through' : 'text-gray-700'}">${item.t}</span>
+                        <div class="flex items-center gap-2 mt-1">
+                            <div class="w-full h-1 bg-gray-200 rounded-full overflow-hidden">
+                                <div class="h-full ${item.c ? 'bg-green-500' : 'bg-amber-200'} rounded-full" style="width: ${item.c ? '100%' : '0%'}"></div>
+                            </div>
+                            <span class="text-[10px] ${item.c ? 'text-green-600' : 'text-amber-500'} font-bold">${item.c ? 'PRONTO' : 'PENDENTE'}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            updateChecklistProgress();
+        }
+
+        render();
+    </script>
+</body>
+</html>
