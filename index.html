@@ -13,9 +13,17 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Passaporte Rio">
     <meta name="theme-color" content="#E67E22">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Passaporte Rio">
+    <meta name="msapplication-TileColor" content="#E67E22">
     
-    <!-- Manifest -->
-    <link rel="manifest" href="data:application/manifest+json,{%22name%22:%22Passaporte%20Rio%20-%20Caique%20%26%20Daniela%22,%22short_name%22:%22Passaporte%20Rio%22,%22description%22:%22Passaporte%20digital%20para%20nossa%20viagem%20ao%20Rio%22,%22start_url%22:%22/%22,%22display%22:%22standalone%22,%22background_color%22:%22#1A2A44%22,%22theme_color%22:%22#E67E22%22,%22orientation%22:%22portrait%22,%22icons%22:[{%22src%22:%22data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20viewBox=%270%200%20512%20512%27%3E%3Crect%20width=%27512%27%20height=%27512%27%20rx=%27100%27%20fill=%27%231A2A44%27/%3E%3Ccircle%20cx=%27256%27%20cy=%27256%27%20r=%27150%27%20fill=%27%23E67E22%27%20stroke=%27%23F1C40F%27%20stroke-width=%2720%27/%3E%3Cpath%20d=%27M256%20150%20L256%20362%20M150%20256%20L362%20256%27%20stroke=%27%23F1C40F%27%20stroke-width=%2730%27%20stroke-linecap=%27round%27/%3E%3Ctext%20x=%27256%27%20y=%27280%27%20font-family=%27Arial%27%20font-size=%2780%27%20fill=%27white%27%20text-anchor=%27middle%27%3EBR%3C/text%3E%3C/svg%3E%22,%22sizes%22:%22512x512%22,%22type%22:%22image/svg+xml%22}]}">
+    <!-- Manifest corrigido -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgcng9IjQwIiBmaWxsPSIjMUEyQTQ0Ii8+PGNpcmNsZSBjeD0iOTAiIGN5PSI5MCIgcj0iNjAiIGZpbGw9IiNFNjdFMjIiIHN0cm9rZT0iI0YxQzQwRiIgc3Ryb2tlLXdpZHRoPSIxMCIvPjxwYXRoIGQ9Ik05MCA1MEw5MCAxMzBNNTAgOTBMMTMwIDkwIiBzdHJva2U9IiNGMUM0MEYiIHN0cm9rZS13aWR0aD0iMTUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjx0ZXh0IHg9IjkwIiB5PSIxMDAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyMCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkJSPC90ZXh0Pjwvc3ZnPg==">
+    <link rel="apple-touch-icon" sizes="192x192" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgcng9IjQwIiBmaWxsPSIjMUEyQTQ0Ii8+PGNpcmNsZSBjeD0iOTYiIGN5PSI5NiIgcj0iNjUiIGZpbGw9IiNFNjdFMjIiIHN0cm9rZT0iI0YxQzQwRiIgc3Ryb2tlLXdpZHRoPSIxMCIvPjxwYXRoIGQ9Ik05NiA0MEw5NiAxNTJNNDAgOTZMMTUyIDk2IiBzdHJva2U9IiNGMUM0MEYiIHN0cm9rZS13aWR0aD0iMTYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjx0ZXh0IHg9Ijk2IiB5PSIxMDgiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyNCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkJSPC90ZXh0Pjwvc3ZnPg==">
+    <link rel="apple-touch-icon" sizes="512x512" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgcng9IjEwMCIgZmlsbD0iIzFBMkE0NCIvPjxjaXJjbGUgY3g9IjI1NiIgY3k9IjI1NiIgcj0iMTUwIiBmaWxsPSIjRTY3RTIyIiBzdHJva2U9IiNGMUM0MEYiIHN0cm9rZS13aWR0aD0iMjAiLz48cGF0aCBkPSJNMjU2IDE1MEwyNTYgMzYyTDE1MCAyNTZMMzYyIDI1NiIgc3Ryb2tlPSIjRjFDNDBGIiBzdHJva2Utd2lkdGg9IjMwIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48dGV4dCB4PSIyNTYiIHk9IjI4MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjgwIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+QlI8L3RleHQ+PC9zdmc+">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@1,400;1,700&display=swap" rel="stylesheet">
@@ -26,6 +34,7 @@
             background-color: #F8F5F0;
             scroll-behavior: smooth; 
             overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
         }
         .font-serif-italic { font-family: 'Playfair Display', serif; font-style: italic; }
         .tab-active { 
@@ -315,6 +324,11 @@
         .memory-img:hover {
             transform: scale(1.05);
         }
+        @media (max-width: 768px) {
+            .hide-on-mobile {
+                display: none !important;
+            }
+        }
     </style>
 </head>
 <body class="text-[#2C3E50] overflow-x-hidden">
@@ -351,44 +365,41 @@
                     <!-- Brasão do passaporte -->
                     <div class="passport-crest mb-6"></div>
                     
-                    <!-- Título PASSPORTE -->
-                    <div class="mb-4">
-                        <h1 class="text-amber-500 font-bold uppercase mb-2 passport-title passport-gold-text">
+                    <!-- Título PASSPORTE (Corrigido) -->
+                    <div class="mb-4 w-full">
+                        <h1 class="text-amber-500 font-bold uppercase mb-2 passport-title passport-gold-text text-center">
                             P A S S P O R T E
                         </h1>
                         <div class="w-40 h-[1px] bg-gradient(90deg, transparent, #F1C40F, #E67E22, transparent) mx-auto rounded-full mb-3"></div>
                     </div>
                     
-                    <!-- República Federativa do Brasil -->
-                    <div class="mb-8">
-                        <p class="text-gray-300 uppercase tracking-widest mb-1 passport-subtitle">REPÚBLICA FEDERATIVA DO BRASIL</p>
-                        <p class="text-gray-400 uppercase tracking-widest passport-subtitle">PASSAPORTE ELETRÔNICO</p>
+                    <!-- República Federativa do Brasil (Corrigido) -->
+                    <div class="mb-8 w-full">
+                        <p class="text-gray-300 uppercase tracking-widest mb-1 passport-subtitle text-center">REPÚBLICA FEDERATIVA DO BRASIL</p>
+                        <p class="text-gray-400 uppercase tracking-widest passport-subtitle text-center">PASSAPORTE ELETRÔNICO</p>
                     </div>
                     
                     <!-- Linha divisória -->
                     <div class="w-48 h-px bg-gradient(90deg, transparent, rgba(241,196,15,0.3), rgba(230,126,34,0.3), transparent) mx-auto mb-6"></div>
                     
-                    <!-- Nomes dos titulares -->
-                    <div class="mb-8">
-                        <div class="bg-gradient(90deg, rgba(241,196,15,0.1), rgba(230,126,34,0.1)) p-4 rounded-lg border border-amber-600/30 mb-3">
-                            <p class="text-amber-100 font-bold uppercase mb-2 passport-names">
-                                CAIQUE OLIVEIRA
+                    <!-- Nomes dos titulares (Corrigido) -->
+                    <div class="mb-8 w-full px-6">
+                        <div class="bg-gradient(90deg, rgba(241,196,15,0.1), rgba(230,126,34,0.1)) p-4 rounded-lg border border-amber-600/30 mb-3 text-center">
+                            <p class="text-amber-100 font-bold uppercase mb-3 passport-names tracking-wider">
+                                CAIQUE & DANIELA
                             </p>
-                            <p class="text-amber-100 font-bold uppercase passport-names">
-                                DANIELA SILVA
+                            <p class="text-gray-300 text-sm font-serif-italic tracking-wide">
+                                Viajantes em Missão Romântica
                             </p>
                         </div>
-                        <p class="text-gray-300 text-sm font-serif-italic tracking-wide">
-                            Viajantes em Missão Romântica
-                        </p>
                     </div>
                     
-                    <!-- Informações do passaporte -->
+                    <!-- Informações do passaporte (Corrigido) -->
                     <div class="mb-8 w-full px-8">
                         <div class="grid grid-cols-2 gap-4 mb-4">
                             <div class="text-left">
                                 <p class="text-gray-400 uppercase tracking-widest mb-1 passport-info-label">Nº DO PASSAPORTE</p>
-                                <p class="text-amber-100 font-mono passport-info-value">
+                                <p class="text-amber-100 font-mono passport-info-value leading-tight">
                                     BR • C&D • 2026<br>
                                     • RIO
                                 </p>
@@ -413,9 +424,9 @@
                         </div>
                     </div>
                     
-                    <!-- Carimbo de destino -->
+                    <!-- Carimbo de destino (Corrigido) -->
                     <div class="mb-6 relative">
-                        <div class="passport-stamp w-20 h-20 rounded-full flex items-center justify-center text-sm font-bold rotate-8">
+                        <div class="passport-stamp w-20 h-20 rounded-full flex items-center justify-center text-sm font-bold rotate-8 mx-auto">
                             <div class="transform -rotate-8 text-center">
                                 <div class="font-bold text-lg">RIO</div>
                                 <div class="text-[10px] mt-1">DESTINO</div>
@@ -437,7 +448,7 @@
                     </div>
                     
                     <!-- Texto pequeno de rodapé -->
-                    <p class="absolute bottom-4 text-amber-500/20 text-[8px] uppercase tracking-[0.4em]">
+                    <p class="absolute bottom-4 text-amber-500/20 text-[8px] uppercase tracking-[0.4em] text-center w-full">
                         DOCUMENTO DE VIAGEM DIGITAL
                     </p>
                     
@@ -772,62 +783,249 @@
                         <i class="fas fa-upload mr-2"></i>Importar
                     </button>
                 </div>
+                
+                <!-- Instruções para instalar PWA -->
+                <div id="pwa-instructions" class="mt-8 p-4 bg-white/10 rounded-xl max-w-md mx-auto hidden">
+                    <p class="text-sm mb-2 font-semibold text-amber-300">📱 Para instalar no seu celular:</p>
+                    <p class="text-xs text-gray-300 mb-2"><i class="fas fa-android mr-1"></i> Android: Toque no menu (⋮) → "Adicionar à tela inicial"</p>
+                    <p class="text-xs text-gray-300"><i class="fas fa-apple mr-1"></i> iOS: Toque no ícone de compartilhar (⬆️) → "Adicionar à tela de início"</p>
+                </div>
             </div>
         </footer>
     </div>
 
+    <!-- Script do Manifest Gerado Dinamicamente -->
+    <script type="application/json" id="manifest-data">
+        {
+            "name": "Passaporte Rio - Caique & Daniela",
+            "short_name": "Passaporte Rio",
+            "description": "Passaporte digital para nossa viagem ao Rio",
+            "start_url": "/",
+            "display": "standalone",
+            "background_color": "#1A2A44",
+            "theme_color": "#E67E22",
+            "orientation": "portrait",
+            "scope": "/",
+            "icons": [
+                {
+                    "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzIiIGhlaWdodD0iNzIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjcyIiBoZWlnaHQ9IjcyIiByeD0iMTYiIGZpbGw9IiMxQTJBNTQiLz48Y2lyY2xlIGN4PSIzNiIgY3k9IjM2IiByPSIyNCIgZmlsbD0iI0U2N0UyMiIgc3Ryb2tlPSIjRjFDNDBGIiBzdHJva2Utd2lkdGg9IjQiLz48cGF0aCBkPSJNMzYgMjJNMzYgNTBNMjIgMzZMNTAgMzYiIHN0cm9rZT0iI0YxQzQwRiIgc3Ryb2tlLXdpZHRoPSI2IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48dGV4dCB4PSIzNiIgeT0iNDAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkJSPC90ZXh0Pjwvc3ZnPg==",
+                    "sizes": "72x72",
+                    "type": "image/svg+xml",
+                    "purpose": "any maskable"
+                },
+                {
+                    "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTYiIGhlaWdodD0iOTYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9Ijk2IiBoZWlnaHQ9Ijk2IiByeD0iMjQiIGZpbGw9IiMxQTJBNTQiLz48Y2lyY2xlIGN4PSI0OCIgY3k9IjQ4IiByPSIzMiIgZmlsbD0iI0U2N0UyMiIgc3Ryb2tlPSIjRjFDNDBGIiBzdHJva2Utd2lkdGg9IjYiLz48cGF0aCBkPSJNNDggMjhMNDggNjhNMzIgNDhMNjQgNDgiIHN0cm9rZT0iI0YxQzQwRiIgc3Ryb2tlLXdpZHRoPSI4IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48dGV4dCB4PSI0OCIgeT0iNTQiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxOCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkJSPC90ZXh0Pjwvc3ZnPg==",
+                    "sizes": "96x96",
+                    "type": "image/svg+xml",
+                    "purpose": "any maskable"
+                },
+                {
+                    "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjMyIiBmaWxsPSIjMUEyQTU0Ii8+PGNpcmNsZSBjeD0iNjQiIGN5PSI2NCIgcj0iNDAiIGZpbGw9IiNFNjdFMjIiIHN0cm9rZT0iI0YxQzQwRiIgc3Ryb2tlLXdpZHRoPSI4Ii8+PHBhdGggZD0iTTY0IDM0TDY0IDk0TDM0IDY0TDk0IDY0IiBzdHJva2U9IiNGMUM0MEYiIHN0cm9rZS13aWR0aD0iMTAiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjx0ZXh0IHg9IjY0IiB5PSI3MiIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI0IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+QlI8L3RleHQ+PC9zdmc+",
+                    "sizes": "128x128",
+                    "type": "image/svg+xml",
+                    "purpose": "any maskable"
+                },
+                {
+                    "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgcng9IjQ4IiBmaWxsPSIjMUEyQTU0Ii8+PGNpcmNsZSBjeD0iOTYiIGN5PSI5NiIgcj0iNjAiIGZpbGw9IiNFNjdFMjIiIHN0cm9rZT0iI0YxQzQwRiIgc3Ryb2tlLXdpZHRoPSIxMiIvPjxwYXRoIGQ9Ik05NiA0MEw5NiAxNTJNNDAgOTZMMTUyIDk2IiBzdHJva2U9IiNGMUM0MEYiIHN0cm9rZS13aWR0aD0iMTYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjx0ZXh0IHg9Ijk2IiB5PSIxMDgiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIzNiIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkJSPC90ZXh0Pjwvc3ZnPg==",
+                    "sizes": "192x192",
+                    "type": "image/svg+xml",
+                    "purpose": "any maskable"
+                },
+                {
+                    "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgcng9IjEyOCIgZmlsbD0iIzFBMkE1NCIvPjxjaXJjbGUgY3g9IjI1NiIgY3k9IjI1NiIgcj0iMTUwIiBmaWxsPSIjRTY3RTIyIiBzdHJva2U9IiNGMUM0MEYiIHN0cm9rZS13aWR0aD0iMjQiLz48cGF0aCBkPSJNMjU2IDE0MEwyNTYgMzcyTDE0MCAyNTZMMzcyIDI1NiIgc3Ryb2tlPSIjRjFDNDBGIiBzdHJva2Utd2lkdGg9IjMwIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48dGV4dCB4PSIyNTYiIHk9IjI4OCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjgwIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+QlI8L3RleHQ+PC9zdmc+",
+                    "sizes": "512x512",
+                    "type": "image/svg+xml",
+                    "purpose": "any maskable"
+                }
+            ]
+        }
+    </script>
+
     <!-- Service Worker Registration and PWA Script -->
     <script>
-        // Service Worker Registration
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('data:application/javascript;base64,' + btoa(`
-                const CACHE_NAME = 'passaporte-rio-v1';
-                const urlsToCache = [
-                    '/',
-                    '/index.html'
-                ];
+        // Registrar o Manifest dinamicamente
+        function registerManifest() {
+            const manifestData = JSON.parse(document.getElementById('manifest-data').textContent);
+            const manifestBlob = new Blob([JSON.stringify(manifestData)], {type: 'application/manifest+json'});
+            const manifestURL = URL.createObjectURL(manifestBlob);
+            
+            // Criar link do manifest
+            const manifestLink = document.querySelector('link[rel="manifest"]');
+            if (manifestLink) {
+                manifestLink.href = manifestURL;
+            }
+            
+            // Service Worker Registration
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', async () => {
+                    try {
+                        const registration = await navigator.serviceWorker.register('data:application/javascript;base64,' + btoa(`
+                            const CACHE_NAME = 'passaporte-rio-v3';
+                            const urlsToCache = [
+                                '/',
+                                '/index.html'
+                            ];
 
-                self.addEventListener('install', event => {
-                    event.waitUntil(
-                        caches.open(CACHE_NAME)
-                            .then(cache => cache.addAll(urlsToCache))
-                    );
-                });
+                            self.addEventListener('install', event => {
+                                console.log('[Service Worker] Instalando...');
+                                event.waitUntil(
+                                    caches.open(CACHE_NAME)
+                                        .then(cache => {
+                                            console.log('[Service Worker] Cache aberto');
+                                            return cache.addAll(urlsToCache);
+                                        })
+                                        .then(() => {
+                                            console.log('[Service Worker] Todos os recursos cacheados');
+                                            return self.skipWaiting();
+                                        })
+                                );
+                            });
 
-                self.addEventListener('fetch', event => {
-                    event.respondWith(
-                        caches.match(event.request)
-                            .then(response => response || fetch(event.request))
-                    );
+                            self.addEventListener('activate', event => {
+                                console.log('[Service Worker] Ativando...');
+                                event.waitUntil(
+                                    caches.keys().then(cacheNames => {
+                                        return Promise.all(
+                                            cacheNames.map(cacheName => {
+                                                if (cacheName !== CACHE_NAME) {
+                                                    console.log('[Service Worker] Removendo cache antigo:', cacheName);
+                                                    return caches.delete(cacheName);
+                                                }
+                                            })
+                                        );
+                                    }).then(() => {
+                                        console.log('[Service Worker] Agora controlando todos os clients');
+                                        return self.clients.claim();
+                                    })
+                                );
+                            });
+
+                            self.addEventListener('fetch', event => {
+                                console.log('[Service Worker] Fetching:', event.request.url);
+                                event.respondWith(
+                                    caches.match(event.request)
+                                        .then(response => {
+                                            if (response) {
+                                                console.log('[Service Worker] Cache hit:', event.request.url);
+                                                return response;
+                                            }
+                                            console.log('[Service Worker] Cache miss, buscando na rede:', event.request.url);
+                                            return fetch(event.request)
+                                                .then(response => {
+                                                    if (!response || response.status !== 200 || response.type !== 'basic') {
+                                                        return response;
+                                                    }
+                                                    const responseToCache = response.clone();
+                                                    caches.open(CACHE_NAME)
+                                                        .then(cache => {
+                                                            cache.put(event.request, responseToCache);
+                                                        });
+                                                    return response;
+                                                })
+                                                .catch(error => {
+                                                    console.error('[Service Worker] Fetch failed:', error);
+                                                    return new Response('Offline - Modo offline ativado', {
+                                                        status: 503,
+                                                        statusText: 'Service Unavailable',
+                                                        headers: new Headers({'Content-Type': 'text/plain'})
+                                                    });
+                                                });
+                                        })
+                                );
+                            });
+
+                            self.addEventListener('message', event => {
+                                if (event.data && event.data.type === 'SKIP_WAITING') {
+                                    self.skipWaiting();
+                                }
+                            });
+                        `));
+                        
+                        console.log('Service Worker registrado com sucesso:', registration.scope);
+                        
+                        // Verificar atualizações
+                        registration.addEventListener('updatefound', () => {
+                            const newWorker = registration.installing;
+                            console.log('Novo Service Worker encontrado:', newWorker.state);
+                            
+                            newWorker.addEventListener('statechange', () => {
+                                console.log('Estado do novo Service Worker:', newWorker.state);
+                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    console.log('Nova versão disponível!');
+                                    showNotification('Nova versão disponível! Atualize o app.', 'warning');
+                                }
+                            });
+                        });
+                        
+                        // Verificar atualizações periodicamente
+                        setInterval(() => {
+                            registration.update();
+                        }, 60 * 60 * 1000); // A cada 1 hora
+                        
+                    } catch (err) {
+                        console.log('Erro ao registrar Service Worker:', err);
+                    }
                 });
-            `)).then(() => {
-                console.log('Service Worker registrado com sucesso');
-            }).catch(err => {
-                console.log('Erro ao registrar Service Worker:', err);
-            });
+            }
         }
 
         // PWA Installation
         let deferredPrompt;
         const installBtn = document.getElementById('installBtn');
+        const pwaInstructions = document.getElementById('pwa-instructions');
 
         window.addEventListener('beforeinstallprompt', (e) => {
+            console.log('beforeinstallprompt disparado');
             e.preventDefault();
             deferredPrompt = e;
+            
+            // Mostrar botão de instalação
             installBtn.classList.remove('hidden');
+            
+            // Mostrar instruções para iOS
+            if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
+                pwaInstructions.classList.remove('hidden');
+            }
             
             installBtn.onclick = async () => {
                 if (deferredPrompt) {
                     deferredPrompt.prompt();
                     const { outcome } = await deferredPrompt.userChoice;
+                    console.log('Usuário respondeu ao prompt:', outcome);
                     if (outcome === 'accepted') {
                         showNotification('App instalado com sucesso!', 'success');
                         installBtn.classList.add('hidden');
+                        pwaInstructions.classList.add('hidden');
+                    } else {
+                        showNotification('Instalação cancelada', 'warning');
                     }
                     deferredPrompt = null;
                 }
             };
         });
+
+        // Verificar se já está instalado
+        window.addEventListener('appinstalled', (evt) => {
+            console.log('App instalado com sucesso');
+            installBtn.classList.add('hidden');
+            pwaInstructions.classList.add('hidden');
+            showNotification('Passaporte Rio instalado!', 'success');
+        });
+
+        // Detectar se está rodando como PWA
+        function checkDisplayMode() {
+            if (window.matchMedia('(display-mode: standalone)').matches) {
+                console.log('Rodando como PWA instalado');
+                installBtn.classList.add('hidden');
+                pwaInstructions.classList.add('hidden');
+                document.body.classList.add('pwa-installed');
+            } else if (navigator.standalone) {
+                console.log('Rodando como PWA no iOS');
+                installBtn.classList.add('hidden');
+                pwaInstructions.classList.add('hidden');
+                document.body.classList.add('pwa-installed');
+            }
+        }
 
         // Offline Detection
         window.addEventListener('online', () => {
@@ -854,6 +1052,31 @@
                 notification.remove();
             }, 3000);
         }
+
+        // Inicializar PWA
+        document.addEventListener('DOMContentLoaded', () => {
+            registerManifest();
+            checkDisplayMode();
+            
+            // Forçar recarga se for uma atualização
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.addEventListener('controllerchange', () => {
+                    console.log('Controller changed, recarregando...');
+                    window.location.reload();
+                });
+            }
+            
+            // Detectar navegador para instruções específicas
+            const userAgent = navigator.userAgent.toLowerCase();
+            if (userAgent.includes('iphone') || userAgent.includes('ipad')) {
+                // iOS - mostrar instruções específicas
+                setTimeout(() => {
+                    if (!document.body.classList.contains('pwa-installed')) {
+                        pwaInstructions.classList.remove('hidden');
+                    }
+                }, 3000);
+            }
+        });
     </script>
 
     <!-- Main Application Script -->
@@ -1171,7 +1394,7 @@
                             ${day.route}
                         </p>
                     </div>
-                    <div class="hidden md:block">
+                    <div class="hidden md:block hide-on-mobile">
                         <div class="text-xs text-gray-400 uppercase tracking-widest mb-2">Progresso do Dia</div>
                         <div class="w-48 h-2 bg-gray-200 rounded-full overflow-hidden">
                             <div class="h-full bg-amber-500 rounded-full" style="width: ${(day.activities.filter(a => a.completed).length / day.activities.length) * 100}%"></div>
@@ -1324,11 +1547,6 @@
                     travelDiary = this.value;
                     localStorage.setItem('rio-diary', travelDiary);
                 });
-            }
-            
-            // Verificar se está rodando como PWA
-            if (window.matchMedia('(display-mode: standalone)').matches) {
-                console.log('Rodando como PWA instalado');
             }
             
             // Inicializar offline detection
